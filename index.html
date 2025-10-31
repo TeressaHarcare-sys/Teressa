@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teressa Haircare - Hair Oil & Hair Tonik</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon-32x32.png" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --green: #445B24;
+      --light-green: #6B8E3D;
+      --cream: #E8DCB0;
+      --dark: #1b1b1b;
+      --white: #ffffff;
+      --gradient-green: linear-gradient(135deg, #445B24, #6B8E3D);
+      --shadow: 0 10px 30px rgba(68, 91, 36, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--cream);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-green);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--green);
+    }
+
+    body {
+      background: linear-gradient(45deg, var(--cream), #F5F0D8);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Floating Leaves Animation */
+    .floating-leaves {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .leaf {
+      position: absolute;
+      color: var(--green);
+      font-size: 20px;
+      animation: float 15s infinite linear;
+      opacity: 0.7;
+    }
+
+    .leaf:nth-child(odd) {
+      color: var(--light-green);
+      animation-duration: 20s;
+    }
+
+    .leaf:nth-child(3n) {
+      font-size: 16px;
+      animation-duration: 25s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Page Load Animation */
+    body {
+      opacity: 0;
+      animation: fadeInPage 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInPage {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--gradient-green);
+      color: var(--white);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      background: rgba(68, 91, 36, 0.95);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #fff, #E8DCB0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+      to { filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); }
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cream);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      transform: translateY(-2px);
+      color: var(--cream);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--white);
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: rotate(90deg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(68,91,36,0.3)), url('hero-terssa.jpg') center/cover no-repeat;
+      color: var(--white);
+      padding: 8rem 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(68,91,36,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroSlideUp 1s ease-out 0.5s both;
+    }
+
+    @keyframes heroSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: textGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+      to { text-shadow: 2px 2px 20px rgba(255,255,255,0.3); }
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .hero button {
+      background: var(--gradient-green);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .hero button:hover::before {
+      left: 100%;
+    }
+
+    .hero button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(68, 91, 36, 0.4);
+    }
+
+    /* ===== PRODUK ===== */
+    .produk {
+      padding: 5rem 5%;
+      text-align: center;
+      position: relative;
+    }
+
+    .produk h2 {
+      color: var(--green);
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .produk h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient-green);
+      border-radius: 2px;
+    }
+
+    .produk-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    .card.animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient-green);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(68, 91, 36, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 2rem;
+    }
+
+    .card-content h3 {
+      color: var(--green);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .card-content p {
+      margin-bottom: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--green);
+      margin: 1rem 0;
+    }
+
+    .shopee-btn {
+      background: linear-gradient(135deg, #6B8E3D, #6B8E3D);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .shopee-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .shopee-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .shopee-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(238, 77, 45, 0.4);
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    /* ===== TESTIMONI ===== */
+    .testimoni {
+      background: linear-gradient(135deg, var(--green), var(--light-green));
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimoni::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      animation: float-pattern 20s linear infinite;
+    }
+
+    @keyframes float-pattern {
+      from { transform: translateY(0); }
+      to { transform: translateY(-100px); }
+    }
+
+    .testimoni h2 {
+      margin-bottom: 3rem;
+      font-size: 2.2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimoni-item {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimoni-item:hover {
+      transform: scale(1.02);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, var(--dark), #2c2c2c);
+      color: var(--cream);
+      text-align: center;
+      padding: 3rem 5%;
+      position: relative;
+    }
+
+    .contact-info {
+      margin-bottom: 2rem;
+    }
+
+    .contact-info h3 {
+      color: var(--light-green);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .contact-info p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .social-links {
+      margin: 2rem 0;
+    }
+
+    footer a {
+      color: var(--cream);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--light-green);
+      transform: translateY(-3px);
+    }
+
+    /* ===== FADE-IN ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+      
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--gradient-green);
+        position: absolute;
+        top: 70px;
+        right: 5%;
+        width: 200px;
+        padding: 1rem;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .produk-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* Particle Effect */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--light-green);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: particle-float 8s infinite linear;
+    }
+
+    @keyframes particle-float {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Leaves -->
+  <div class="floating-leaves" id="floatingLeaves"></div>
+  
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <h1>🌿 Teressa Haircare</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navMenu">
+      <a href="index.html">🏠 Beranda</a>
+      <a href="tentang.html">ℹ️ Tentang Kami</a>
+      <a href="#produk">🛍️ Produk</a>
+      <a href="#kontak">📞 Kontak</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>🌿 Rambut Sehat & Berkilau dengan Teressa Haircare</h2>
+      <p>Rawat rambutmu secara alami dengan Hair Oil dan Hair Tonik Teressa — solusi terbaik untuk rambut rontok dan kering. Dibuat dengan cinta dari bahan-bahan alami pilihan.</p>
+      <button onclick="scrollToProduk()">✨ Lihat Produk Kami</button>
+    </div>
+  </section>
+
+  <!-- PRODUK -->
+  <section id="produk" class="produk fade-in">
+    <h2>🌟 Produk Unggulan Kami</h2>
+    <div class="produk-container">
+      <div class="card">
+        <img src="IMG-20250727-WA0002.jpg" alt="Teressa Hair Tonik">
+        <div class="card-content">
+          <h3>🌿 Teressa Hair Tonik</h3>
+          <p>Menguatkan akar rambut, mengurangi kerontokan, dan memberikan kesegaran alami. Formula khusus untuk rambut yang lebih kuat dan sehat.</p>
+          <p class="price">💰 Rp 89.000</p>
+          <a href="https://id.shp.ee/ZBTKVZQ" target="_blank" class="shopee-btn">
+            🛒 Beli di Shopee
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="IMG-20250727-WA0000.jpg" alt="Teressa Hair Oil">
+        <div class="card-content">
+          <h3>🌿 Teressa Hair Oil</h3>
+          <p>Menutrisi rambut dari akar hingga ujung. Diformulasikan dengan minyak alami pilihan untuk memberikan kelembutan dan kilau natural pada rambutmu.</p>
+          <p class="price">💰 Rp 95.000</p>
+          <a href="https://id.shp.ee/su2asw4" target="_blank" class="shopee-btn">
+            🛒 Beli di Shopee
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Backup_of_washfilepencuciautocare paket.jpg" alt="Satu Paket">
+        <div class="card-content">
+          <h3>🌿 Paket Lengkap</h3>
+          <p>Kombinasi sempurna Hair Oil dan Hair Tonik untuk perawatan rambut maksimal. Hemat lebih banyak dengan paket lengkap ini!</p>
+          <p class="price">💰 Rp 175.000</p>
+          <a href="https://id.shp.ee/gLLcDcB" target="_blank" class="shopee-btn">
+            🛒 Beli di Shopee
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  <section id="testimoni" class="testimoni fade-in">
+    <h2>💬 Apa Kata Mereka?</h2>
+    <div class="testimoni-item">
+      <p>"Rambutku dulu kering banget, tapi setelah pakai Teressa Hair Oil selama 2 minggu, rambut jadi lembut dan gampang diatur! Wanginya juga natural banget 🌿"</p>
+      <strong>— Rina, Bandung ⭐⭐⭐⭐⭐</strong>
+    </div>
+    <div class="testimoni-item">
+      <p>"Hair Toniknya bikin rambutku nggak gampang rontok lagi. Sekarang rambut lebih tebal dan sehat. Recommended banget! 💚"</p>
+      <strong>— Dewi, Jakarta ⭐⭐⭐⭐⭐</strong>
+    </div>
+    <div class="testimoni-item">
+      <p>"Paket lengkapnya worth it banget! Dalam sebulan rambut udah keliatan lebih berkilau dan kuat. Thank you Teressa! ✨"</p>
+      <strong>— Maya, Surabaya ⭐⭐⭐⭐⭐</strong>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="kontak" class="fade-in">
+    <div class="contact-info">
+      
+      <p>📍 Alamat:parung halang, kec.baleendah,kab bandung.</p>
+    </div>
+    
+    <div class="social-links">
+      <p>🌟 Ikuti kami di:</p>
+      <a href="https://www.instagram.com/teressa.haircare?igsh=MThzOWZucXIxODJtOQ==" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@teressa.haircare?_t=ZS-90zyI9O4IfI&_r=1" target="_blank">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://id.shp.ee/rtpP9Re" target="_blank">
+        <i class="fas fa-shopping-bag"></i>
+      </a>
+    </div>
+    
+    <p style="margin-top: 2rem;">© 2025 Teressa Haircare. All rights reserved💚</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Create floating leaves
+    function createFloatingLeaves() {
+      const leavesContainer = document.getElementById('floatingLeaves');
+      const leafSymbols = ['🍃', '🌿', '🍀', '🌱'];
+      
+      setInterval(() => {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.innerHTML = leafSymbols[Math.floor(Math.random() * leafSymbols.length)];
+        leaf.style.left = Math.random() * 100 + '%';
+        leaf.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        leaf.style.fontSize = (Math.random() * 10 + 16) + 'px';
+        
+        leavesContainer.appendChild(leaf);
+        
+        setTimeout(() => {
+          leaf.remove();
+        }, 25000);
+      }, 3000);
+    }
+
+    // Create particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      
+      setInterval(() => {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+        particle.style.animationDuration = (Math.random() * 3 + 8) + 's';
+        
+        particlesContainer.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 11000);
+      }, 2000);
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll and animations
+    function scrollToProduk() {
+      document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    // Sound effects
+    const clickSound = new Audio('computer-mouse-click-352734.mp3');
+    clickSound.volume = 0.3;
+
+    function playClick() {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    }
+
+    // Add click sounds to buttons
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+        playClick();
+      }
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          
+          // Animate cards
+          if (entry.target.classList.contains('produk')) {
+            const cards = entry.target.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('animate');
+              }, index * 200);
+            });
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Initialize animations
+    window.addEventListener('load', () => {
+      createFloatingLeaves();
+      createParticles();
+    });
+  </script>
+</body>
+</html>

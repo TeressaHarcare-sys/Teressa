@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang Kami - Teressa Haircare</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --green: #445B24;
+      --light-green: #6B8E3D;
+      --cream: #E8DCB0;
+      --dark: #1b1b1b;
+      --white: #ffffff;
+      --gradient-green: linear-gradient(135deg, #445B24, #6B8E3D);
+      --shadow: 0 10px 30px rgba(68, 91, 36, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--cream);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-green);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--green);
+    }
+
+    body {
+      background: linear-gradient(45deg, var(--cream), #F5F0D8);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Floating Leaves Animation */
+    .floating-leaves {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .leaf {
+      position: absolute;
+      color: var(--green);
+      font-size: 20px;
+      animation: float 15s infinite linear;
+      opacity: 0.7;
+    }
+
+    .leaf:nth-child(odd) {
+      color: var(--light-green);
+      animation-duration: 20s;
+    }
+
+    .leaf:nth-child(3n) {
+      font-size: 16px;
+      animation-duration: 25s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Page Load Animation */
+    body {
+      opacity: 0;
+      animation: fadeInPage 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInPage {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--gradient-green);
+      color: var(--white);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      background: rgba(68, 91, 36, 0.95);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #fff, #E8DCB0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+      to { filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); }
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cream);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      transform: translateY(-2px);
+      color: var(--cream);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--white);
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: rotate(90deg);
+    }
+
+    /* ===== HERO TENTANG ===== */
+    .hero-tentang {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(68,91,36,0.3)), url('hero-terssa.jpg') center/cover no-repeat;
+      color: var(--white);
+      text-align: center;
+      padding: 8rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tentang::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(68,91,36,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroSlideUp 1s ease-out 0.5s both;
+    }
+
+    @keyframes heroSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-tentang h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: textGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+      to { text-shadow: 2px 2px 20px rgba(255,255,255,0.3); }
+    }
+
+    .hero-tentang p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* ===== ISI TENTANG ===== */
+    .tentang {
+      padding: 5rem 5%;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .tentang-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .tentang-text h2 {
+      color: var(--green);
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .tentang-text h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-green);
+      border-radius: 2px;
+    }
+
+    .tentang-text p {
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .tentang-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .tentang img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      border-radius: 20px;
+    }
+
+    .tentang-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .tentang-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(68,91,36,0.1), transparent);
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    /* Values Section */
+    .values {
+      background: linear-gradient(135deg, var(--green), var(--light-green));
+      color: var(--white);
+      padding: 5rem 5%;
+      margin: 4rem 0;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .values::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      animation: float-pattern 20s linear infinite;
+    }
+
+    @keyframes float-pattern {
+      from { transform: translateY(0); }
+      to { transform: translateY(-100px); }
+    }
+
+    .values h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .value-item {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .value-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .value-item i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+
+    .value-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, var(--dark), #2c2c2c);
+      color: var(--cream);
+      text-align: center;
+      padding: 3rem 5%;
+      position: relative;
+    }
+
+    .contact-info {
+      margin-bottom: 2rem;
+    }
+
+    .contact-info h3 {
+      color: var(--light-green);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .contact-info p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .social-links {
+      margin: 2rem 0;
+    }
+
+    footer a {
+      color: var(--cream);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--light-green);
+      transform: translateY(-3px);
+    }
+
+    /* ===== FADE-IN ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-tentang h2 {
+        font-size: 2rem;
+      }
+      
+      .hero-tentang {
+        padding: 4rem 1.5rem;
+      }
+      
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--gradient-green);
+        position: absolute;
+        top: 70px;
+        right: 5%;
+        width: 200px;
+        padding: 1rem;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .tentang-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .tentang-text {
+        order: 2;
+      }
+
+      .tentang-image {
+        order: 1;
+      }
+
+      .tentang-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .tentang-text p {
+        text-align: center;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Particle Effect */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--light-green);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: particle-float 8s infinite linear;
+    }
+
+    @keyframes particle-float {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Leaves -->
+  <div class="floating-leaves" id="floatingLeaves"></div>
+  
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <h1>🌿 Teressa Haircare</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navMenu">
+      <a href="index.html">🏠 Beranda</a>
+      <a href="tentang.html" style="text-decoration:underline;">ℹ️ Tentang Kami</a>
+      <a href="index.html#produk">🛍️ Produk</a>
+      <a href="index.html#kontak">📞 Kontak</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-tentang">
+    <div class="hero-content">
+      <h2>🌿 Tentang Teressa Haircare</h2>
+      <p>Perjalanan kami dimulai dari keinginan sederhana — membantu banyak orang mendapatkan rambut sehat dan alami tanpa bahan kimia keras. Dengan cinta dan dedikasi, kami menghadirkan solusi perawatan rambut terbaik untuk Anda.</p>
+    </div>
+  </section>
+
+  <!-- ISI -->
+  <section class="tentang fade-in">
+    <div class="tentang-grid">
+      <div class="tentang-text">
+        <h2>💚 Siapa Kami?</h2>
+        <p><strong>Teressa Haircare</strong> adalah brand perawatan rambut lokal yang berkomitmen menggunakan bahan alami terbaik untuk menjaga kesehatan rambut Anda. Kami percaya bahwa perawatan rambut yang baik dimulai dari alam — karena itulah produk kami diformulasikan tanpa bahan berbahaya.</p>
+        
+        <p>Setiap botol <strong>Teressa Hair Oil</strong> dan <strong>Hair Tonik</strong> dibuat dengan perhatian penuh dan diuji agar aman digunakan setiap hari. Kami ingin setiap pengguna merasakan kepercayaan diri melalui rambut yang kuat, sehat, dan berkilau alami.</p>
+        
+        <p><em>Teressa bukan hanya sekadar produk, tapi perjalanan menuju rambut impianmu.</em> ✨</p>
+      </div>
+      
+      <div class="tentang-image">
+        <img src="IMG-20250727-WA0000.jpg" alt="Teressa Haircare Products" />
+      </div>
+    </div>
+
+    <!-- Values Section -->
+    <div class="values fade-in">
+      <h3>🌟 Nilai-Nilai Kami</h3>
+      <div class="values-grid">
+        <div class="value-item">
+          <i class="fas fa-leaf"></i>
+          <h4>100% Natural</h4>
+          <p>Menggunakan bahan-bahan alami pilihan tanpa bahan kimia berbahaya untuk kesehatan rambut yang optimal.</p>
+        </div>
+        <div class="value-item">
+          <i class="fas fa-heart"></i>
+          <h4>Dibuat dengan Cinta</h4>
+          <p>Setiap produk dibuat dengan penuh perhatian dan kasih sayang untuk memberikan hasil terbaik bagi Anda.</p>
+        </div>
+        <div class="value-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Teruji Aman</h4>
+          <p>Produk kami telah melalui berbagai uji keamanan dan kualitas untuk memastikan keamanan penggunaan sehari-hari.</p>
+        </div>
+        <div class="value-item">
+          <i class="fas fa-star"></i>
+          <h4>Kualitas Premium</h4>
+          <p>Komitmen kami adalah memberikan produk berkualitas tinggi dengan harga yang terjangkau untuk semua kalangan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fade-in">
+    <div class="contact-info">
+      
+      <p>📍 Alamat:parung halang, kec.baleendah,kab bandung.</p>
+    </div>
+    
+    <div class="social-links">
+      <p>🌟 Ikuti kami di:</p>
+      <a href="https://www.instagram.com/teressa.haircare" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@teressa.haircare?_t=ZS-90zyI9O4IfI&_r=1" target="_blank">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://id.shp.ee/rtpP9Re" target="_blank">
+        <i class="fas fa-shopping-bag"></i>
+      </a>
+    </div>
+    
+    <p style="margin-top: 2rem;">© 2025 Teressa Haircare. All rights reserved💚</p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Create floating leaves
+    function createFloatingLeaves() {
+      const leavesContainer = document.getElementById('floatingLeaves');
+      const leafSymbols = ['🍃', '🌿', '🍀', '🌱'];
+      
+      setInterval(() => {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.innerHTML = leafSymbols[Math.floor(Math.random() * leafSymbols.length)];
+        leaf.style.left = Math.random() * 100 + '%';
+        leaf.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        leaf.style.fontSize = (Math.random() * 10 + 16) + 'px';
+        
+        leavesContainer.appendChild(leaf);
+        
+        setTimeout(() => {
+          leaf.remove();
+        }, 25000);
+      }, 3000);
+    }
+
+    // Create particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      
+      setInterval(() => {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+        particle.style.animationDuration = (Math.random() * 3 + 8) + 's';
+        
+        particlesContainer.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 11000);
+      }, 2000);
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Toggle menu untuk mobile
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Initialize animations
+    window.addEventListener('load', () => {
+      createFloatingLeaves();
+      createParticles();
+    });
+  </script>
+</body>
+</html>
